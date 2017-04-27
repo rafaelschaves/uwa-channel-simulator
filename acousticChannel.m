@@ -85,8 +85,8 @@ delay       = (delay_index - 1)*setup.Ts;                      % Calculating del
 
 alpha = log(10^(gain.attenuation/10))/setup.delayspread;       % Exponential attenuation power factor
 
-gain_mean = exp(-alpha*delay);                                 % Calculating the gain mean for each multipath                      
-gain_tap  = raylrnd(gain_mean*sqrt(2/pi));                     % Calculating the gain for each multipath
+gain_variance = exp(-alpha*delay);                             % Calculating the gain ariance for each multipath                      
+gain_tap      = raylrnd(sqrt(gain_variance*2/(4 - pi)));       % Calculating the gain for each multipath
 
 gain_tap = gain_tap/norm(gain_tap);                            % Normalizing gain taps
 
